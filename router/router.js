@@ -1,11 +1,9 @@
 const express = require("express");
-
 const router = express.Router();
 
+const homeController = require("../controller/HomeController");
 
-router.get("/",(req,res,next)=>{
-    res.json({message: "Index"});
-})
+router.get("/",homeController.mostrarTrabajos)
 
 
 module.exports = router;
