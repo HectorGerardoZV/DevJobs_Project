@@ -1,3 +1,4 @@
+
 exports.mostrarTrabajos = (req,res,next)=>{
     try {
         res.render("home",{
