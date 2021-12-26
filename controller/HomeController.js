@@ -1,4 +1,3 @@
-
 exports.mostrarTrabajos = (req,res,next)=>{
     try {
         res.render("home",{
@@ -7,6 +6,7 @@ exports.mostrarTrabajos = (req,res,next)=>{
             barra: true,
             boton: true
         });
+        
     } catch (error) {
         
     }

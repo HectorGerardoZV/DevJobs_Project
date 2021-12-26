@@ -4,7 +4,9 @@
   "description": "DevJobs Project",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "start": "concurrently  \" npm run dev \" \" npm run watch \"  ",
+    "watch" : "webpack watch --mode development"
   },
   "keywords": [
     "NodeJS",
@@ -16,6 +18,7 @@
   "author": "HectorGerardoZV",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^6.5.1",
     "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^10.0.0",
@@ -28,6 +31,11 @@
     "slug": "^5.1.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "babel-loader": "^8.2.3",
+    "nodemon": "^2.0.15",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
   }
 }

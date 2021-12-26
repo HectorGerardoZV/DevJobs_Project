@@ -5,14 +5,21 @@ const path = require("path");
 const mongoose  = require("mongoose");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const bodyParser = require("body-parser");
 require("dotenv").config({path: "variables.env"});
 
 
 //Adding server
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 //Creating the handlebars configuration
-const hbs = engine.create({ defaultLayout: 'layout'});
+const hbs = engine.create({ 
+    defaultLayout: 'layout',
+    helpers: require("./helpers/handlebars") 
+});
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 

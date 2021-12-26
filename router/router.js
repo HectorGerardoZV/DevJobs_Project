@@ -8,6 +8,7 @@ router.get("/",homeController.mostrarTrabajos);
 
 
 router.get("/vacantes/nueva",vacantesController.formularioNuevaVacante);
+router.post("/vacantes/nueva",vacantesController.agregarVacante);
 
 
 module.exports = router;
