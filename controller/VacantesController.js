@@ -29,3 +29,32 @@ exports.agregarVacante =  async(req,res,next)=>{
         console.log(error);
     }
 }
+
+exports.mostrarVacante = async(req,res,next)=>{
+    try {
+        const {url} = req.params;
+
+        const vacante = await Vacante.findOne({url}).lean();
+
+        if(vacante){
+            res.render("vacante",{
+                namePage : vacante.titulo,
+                vacante,
+                barra:true
+            });
+        }
+    } catch (error) {
+        next();
+    }
+}
+
+exports.formEditarVacante = async(req,res,next)=>{
+    try {
+        const {url} = req.params;
+        const vacante = await Vacante.findOne({url});
+
+        res.json(vacante);
+    } catch (error) {
+        
+    }
+}
