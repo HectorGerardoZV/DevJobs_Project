@@ -25,10 +25,20 @@ class ListadoHabilidades {
         const data = [...this.skillsList];
         document.querySelector("#skills").value = data;
     }
+    skillsSeleccionadas = ()=>{
+        const seleccionadas = Array.from( document.querySelectorAll(".lista-conocimientos .activo"));
+        seleccionadas.forEach(seleccion=>{
+            this.skillsList.add(seleccion.textContent);
+        })
+        const data = [...this.skillsList];
+        document.querySelector("#skills").value = data;
+        
+    }
 }
 document.addEventListener("DOMContentLoaded",()=>{
     const listadoHabilidades = new ListadoHabilidades();
     if(listadoHabilidades.exits()){
         listadoHabilidades.skillsEvent();
+        listadoHabilidades.skillsSeleccionadas();
     }
 });

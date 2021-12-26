@@ -51,10 +51,23 @@ exports.mostrarVacante = async(req,res,next)=>{
 exports.formEditarVacante = async(req,res,next)=>{
     try {
         const {url} = req.params;
-        const vacante = await Vacante.findOne({url});
+        const vacante = await Vacante.findOne({url}).lean();
 
-        res.json(vacante);
+        res.render("editarVacante",{
+            namePage: "Editando Vacante",
+            vacante
+        });
     } catch (error) {
-        
+        next();
+    }
+}
+exports.editarVacante = async(req,res,next)=>{
+    try {
+        const vacanteActualizada = req.body;
+        vacanteActualizada.skills = vacanteActualizada.skills.split(",");
+        const vacante = await Vacante.findOneAndUpdate({url: req.params.url},vacanteActualizada,{new:true});
+        res.redirect(`/vacantes/${vacante.url}`);
+    } catch (error) {
+        next();
     }
 }
