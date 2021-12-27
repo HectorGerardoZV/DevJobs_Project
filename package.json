@@ -18,13 +18,16 @@
   "author": "HectorGerardoZV",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "concurrently": "^6.5.1",
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "express-session": "^1.17.2",
+    "express-validator": "^5.3.1",
     "mongoose": "^6.1.3",
     "shortid": "^2.2.16",
     "slug": "^5.1.1"

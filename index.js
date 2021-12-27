@@ -6,6 +6,11 @@ const mongoose  = require("mongoose");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const expressValidator = require("express-validator");
+const flash = require("connect-flash");
+
+
+
 require("dotenv").config({path: "variables.env"});
 
 
@@ -14,6 +19,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(expressValidator());
+
 
 //Creating the handlebars configuration
 const hbs = engine.create({ 
@@ -40,6 +47,15 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
+
+app.use(flash());
+
+//MW
+app.use((req,res,next)=>{
+    res.locals.mensajes = req.flash();
+    next();
+})
 
 
 

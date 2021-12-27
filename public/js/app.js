@@ -35,8 +35,17 @@ class ListadoHabilidades {
         
     }
 }
+
 document.addEventListener("DOMContentLoaded",()=>{
     const listadoHabilidades = new ListadoHabilidades();
+    const alertas = document.querySelector(".alertas");
+
+    if(alertas){
+      setTimeout(() => {
+        alertas.remove();
+      }, 3000);
+       
+    }
     if(listadoHabilidades.exits()){
         listadoHabilidades.skillsEvent();
         listadoHabilidades.skillsSeleccionadas();

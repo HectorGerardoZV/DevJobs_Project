@@ -1,0 +1,26 @@
+<main class="contenedor">
+    <form action="/crearCuenta" method="POST" class="default-form">
+        <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" placeholder="Tu nombre" value="{{usuario.nombre}}">
+        </div>
+        <div class="campo">
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="Tu E-mail" value="{{usuario.email}}" >
+        </div> 
+        <div class="campo">
+            <label for="contraseña">Constraseña</label>
+            <input type="password" name="password" placeholder="Tu contraseña" value="{{usuario.password}}">
+        </div>
+        <div class="campo">
+            <label for="contraseña">Repetir Constraseña</label>
+            <input type="password" name="passwordAgain" placeholder="Repetir contraseña" value="{{usuario.passwordAgain}}">
+        </div>
+        <div class="campo acciones">
+            <a class="hoverAction" href="/iniciarSesion">Volver a iniciar sesión</a>
+        </div>
+        <div class="campo">
+            <input type="submit" value="Crar Cuenta" class="btn btn-azul">
+        </div>
+    </form>
+</main>

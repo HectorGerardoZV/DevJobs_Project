@@ -517,3 +517,13 @@ p.candidatos {
     color: white;
     font-size: 1.8rem;
 }
+
+/*My Style*/
+
+.hoverAction{
+    font-size: 2rem;
+    transition: .3s ease;
+}
+.hoverAction:hover{
+    color: white;
+}
