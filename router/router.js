@@ -23,7 +23,7 @@ router.post("/crearCuenta",
      );
 
 router.get("/iniciarSesion", usuarioController.formIniciarSesion);
-router.post("/iniciarSesion", usuarioController.iniciarSesion);
+router.post("/iniciarSesion", usuarioController.autenticarUsuario);
 
 
 

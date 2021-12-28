@@ -11,9 +11,7 @@ const UsuariosSchema = new Schema({
     email: {
         type: String,
         trim: true,
-        unique: true,
-        lowercase: true,
-        required: true
+        lowercase: true,        
     },
     password: {
         type: String,
@@ -36,6 +34,7 @@ UsuariosSchema.pre("save", async function(next){
     this.password = hash;
     next();
 });
+
 
 
 module.exports = mongoose.model("Usuarios", UsuariosSchema);

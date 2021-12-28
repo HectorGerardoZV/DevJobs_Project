@@ -9,6 +9,9 @@ const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
 const flash = require("connect-flash");
 
+const passport = require("./config/passport");
+
+
 
 
 require("dotenv").config({path: "variables.env"});
@@ -48,12 +51,17 @@ app.use(session({
     saveUninitialized: false
 }));
 
+//Add passport
+app.use(passport.initialize());
+app.use(passport.session());
 
+//Adding flash to resolve errors
 app.use(flash());
 
 //MW
 app.use((req,res,next)=>{
     res.locals.mensajes = req.flash();
+    res.locals.usuario = req.usuario || null;
     next();
 })
 

@@ -1,4 +1,6 @@
 const Usuario = require("../model/Usuarios");
+const passport = require("passport");
+
 exports.formCrearCuenta = (req,res)=>{
     res.render("crearCuenta",{
         namePage: "Crear cuenta",
@@ -9,15 +11,15 @@ exports.formCrearCuenta = (req,res)=>{
 exports.crearCuenta = async (req,res,next)=>{
     try {
         const usuario = new Usuario(req.body);
+        
         const nuevoUsuario = await usuario.save();
-        if(!nuevoUsuario){
-            return next();            
-        }else{
-            res.redirect("/iniciarSesion");
-        }
+        
+        res.redirect("/iniciarSesion");
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        // req.flash("error", "Este correo electronico ya esta en uso");
+        // res.redirect("/crearCuenta");
     }
 }
 
@@ -68,10 +70,11 @@ exports.formIniciarSesion = (req,res)=>{
     }
 }
 
-exports.iniciarSesion = async (req,res,next)=>{
-    try {
-        res.json("YES");
-    } catch (error) {
-        
-    }
-}
+
+exports.autenticarUsuario = passport.authenticate("local",{
+    successRedirect: "/administracion",
+    failureRedirect: "/iniciarSesion",
+    failureFlash: true,
+    badRequestMessage: "Ambos campos son obligatorios",
+
+})
