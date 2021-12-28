@@ -70,11 +70,3 @@ exports.formIniciarSesion = (req,res)=>{
     }
 }
 
-
-exports.autenticarUsuario = passport.authenticate("local",{
-    successRedirect: "/administracion",
-    failureRedirect: "/iniciarSesion",
-    failureFlash: true,
-    badRequestMessage: "Ambos campos son obligatorios",
-
-})
