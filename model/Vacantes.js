@@ -46,6 +46,11 @@ const VacantesSchema = new Schema({
             emial: String,
             cv: String
         }]
+    },
+    autor: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Usuarios",
+        required: "El autor es obligatorio"
     }
 }); 
 VacantesSchema.pre("save",function(next){

@@ -527,3 +527,6 @@ p.candidatos {
 .hoverAction:hover{
     color: white;
 }
+.vacante{
+    gap: 2rem;
+}

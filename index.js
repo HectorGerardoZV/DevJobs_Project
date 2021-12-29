@@ -61,7 +61,7 @@ app.use(flash());
 //MW
 app.use((req,res,next)=>{
     res.locals.mensajes = req.flash();
-    res.locals.usuario = req.usuario || null;
+    res.locals.usuario = {...req.user}._doc||null;
     next();
 })
 

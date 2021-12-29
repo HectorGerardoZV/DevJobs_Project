@@ -13,9 +13,11 @@ exports.formularioNuevaVacante = async (req,res,next)=>{
 }
 exports.agregarVacante =  async(req,res,next)=>{
     try {
+        const autor = res.locals.usuario._id;
         let data = req.body;
         data.skills = req.body.skills.split(",");
         const vacante = new Vacante(data);
+        vacante.autor = autor;
         
         const result = await vacante.save();
         if(result){
@@ -23,7 +25,6 @@ exports.agregarVacante =  async(req,res,next)=>{
         }else{
             res.redirect("/");
         }
-        
         
     } catch (error) {
         console.log(error);

@@ -4,4 +4,25 @@
         <a href="/editarPerfil" class="btn btn-azul">Editar Perfil</a>
         <a href="/vacantes/nueva" class="btn btn-verde">Nueva Vacante</a>
     </div>
+    <h2>Tus vacantes</h2>
+    {{#if vacantes.length}}
+        {{#each vacantes}}
+        <div class="vacante panel-administracion">
+            <div class="caja">
+                <h3>{{empresa}}</h3>
+                <p class="puesto">{{titulo}}</p>
+            </div>
+            <div class="centrar-vertical caja">
+                <a href="/candidatos/{{_id}}" class="btn btn-amarillo">Ver Candidatos</a>
+            </div>
+            <div class="centrar-vertical caja">
+                <a href="/vacantes/editar/{{url}}" class="btn btn-verde">Editar Vacante</a>
+            </div>
+            <div class="centrar-vertical caja">
+                <a href="#" class="btn btn-rojo">Elimianr Vacante</a>
+            </div>
+        </div>
+        {{/each}}
+    {{/if}}
+    
 </main>
