@@ -417,7 +417,10 @@ p.candidatos {
     margin-top: 2rem;
     color: white;
     display: flex;
+    justify-content: space-between;
+    gap: 1rem;
 }
+
 .cerrar-sesion img {
         width: 80px;
 }
@@ -529,4 +532,9 @@ p.candidatos {
 }
 .vacante{
     gap: 2rem;
+}
+h4{
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-right: 2rem;
 }

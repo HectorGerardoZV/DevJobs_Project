@@ -4,7 +4,9 @@ exports.formularioNuevaVacante = async (req,res,next)=>{
     try {
         res.render("nuevaVacante",{
             namaPage: "Nueva Vacante",
-            tagLine: "Llena el formulario y publica tu vacante"
+            tagLine: "Llena el formulario y publica tu vacante",
+            cerrarSesion: true,
+            nombre: res.locals.usuario.nombre
         });
     } catch (error) {
         
@@ -56,7 +58,9 @@ exports.formEditarVacante = async(req,res,next)=>{
 
         res.render("editarVacante",{
             namePage: "Editando Vacante",
-            vacante
+            vacante,
+            cerrarSesion: true,
+            nombre: res.locals.usuario.nombre
         });
     } catch (error) {
         next();

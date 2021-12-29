@@ -36,11 +36,27 @@ router.post("/crearCuenta",
     usuarioController.crearCuenta
      );
 
+     //Authentication
 router.get("/iniciarSesion", usuarioController.formIniciarSesion);
 router.post("/iniciarSesion", authController.autenticarUsuario);
+router.get("/cerrarSesion", 
+    authController.usuarioAutenticado,
+    authController.cerrarSesion
+    );
+    //Administration
 router.get("/administracion", 
     authController.usuarioAutenticado,
     administracionController.mostrarPanel
+    );
+
+    //User Profile
+router.get("/editarPerfil",
+    authController.usuarioAutenticado,
+    usuarioController.formEditarPerfil
+    );
+router.post("/editarPerfil",
+    authController.usuarioAutenticado,
+    usuarioController.editarPerfil
     );
 
 

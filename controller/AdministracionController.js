@@ -8,7 +8,9 @@ exports.mostrarPanel = async(req,res,next)=>{
         res.render("administracion",{
             namePage: "Panel de administración",
             tagLine: "Crea y administra tus vacantes aquí",
-            vacantes
+            vacantes,
+            cerrarSesion: true,
+            nombre: res.locals.usuario.nombre
         });
     } catch (error) {
         console.log(error);

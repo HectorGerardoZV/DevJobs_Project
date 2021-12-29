@@ -14,3 +14,9 @@ exports.usuarioAutenticado = (req,res,next)=>{
     }
     res.redirect("/iniciarSesion");
 }
+
+exports.cerrarSesion = (req,res,next)=>{
+    req.session.destroy(()=>{       
+        res.redirect("/iniciarSesion");
+    });
+}
