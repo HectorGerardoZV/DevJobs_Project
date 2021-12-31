@@ -9,7 +9,7 @@ const authController = require("../controller/AuthController");
 
 router.get("/",homeController.mostrarTrabajos);
 
-
+//Vacantes
 router.get("/vacantes/nueva",
     authController.usuarioAutenticado,
     vacantesController.formularioNuevaVacante
@@ -28,6 +28,8 @@ router.post("/vacantes/editar/:url",
     authController.usuarioAutenticado,
     vacantesController.editarVacante
     );
+
+router.delete("/vacantes/eliminar/:id", vacantesController.eliminarVacante)
 
 //Session
 router.get("/crearCuenta", usuarioController.formCrearCuenta);

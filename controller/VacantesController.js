@@ -13,6 +13,7 @@ exports.formularioNuevaVacante = async (req,res,next)=>{
     }
     
 }
+
 exports.agregarVacante =  async(req,res,next)=>{
     try {
 
@@ -94,6 +95,7 @@ exports.formEditarVacante = async(req,res,next)=>{
         next();
     }
 }
+
 exports.editarVacante = async(req,res,next)=>{
     try {
 
@@ -136,4 +138,19 @@ exports.editarVacante = async(req,res,next)=>{
     } catch (error) {
         next();
     }
+}
+
+exports.eliminarVacante = async(req,res,next)=>{
+    const {id} = req.params;
+    const usuario = res.locals.usuario;
+    const vacante = await Vacante.findById(id);
+
+    if(usuario._id.equals(vacante.autor)){
+        vacante.remove();
+        res.status(200).send("Vacante eliminada correctamente");
+    }else{
+        res.status(403).send("Error");
+    }
+
+    
 }

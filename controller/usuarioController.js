@@ -18,9 +18,8 @@ exports.crearCuenta = async (req,res,next)=>{
         res.redirect("/iniciarSesion");
 
     } catch (error) {
-        console.log(error);
-        // req.flash("error", "Este correo electronico ya esta en uso");
-        // res.redirect("/crearCuenta");
+        req.flash("error", "Este correo electronico ya esta en uso");
+        res.redirect("/crearCuenta");
     }
 }
 
