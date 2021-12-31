@@ -8,6 +8,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
 const flash = require("connect-flash");
+const fileupload = require("express-fileupload");
 
 const passport = require("./config/passport");
 
@@ -19,11 +20,10 @@ require("dotenv").config({path: "variables.env"});
 
 //Adding server
 const app = express();
-
+app.use(fileupload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressValidator());
-
 
 //Creating the handlebars configuration
 const hbs = engine.create({ 
@@ -69,6 +69,7 @@ app.use((req,res,next)=>{
 
 //Adding router
 app.use("/",router);
+
 
 //Starting server
 app.listen(process.env.PUERTO, ()=>{

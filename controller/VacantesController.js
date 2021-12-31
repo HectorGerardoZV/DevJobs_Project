@@ -66,7 +66,7 @@ exports.mostrarVacante = async(req,res,next)=>{
     try {
         const {url} = req.params;
 
-        const vacante = await Vacante.findOne({url}).lean();
+        const vacante = await Vacante.findOne({url}).lean().populate("autor");
 
         if(vacante){
             res.render("vacante",{

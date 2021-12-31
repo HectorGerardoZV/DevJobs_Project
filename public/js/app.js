@@ -103,7 +103,6 @@ class AccionesVacante {
     }
 }
 
-
 document.addEventListener("DOMContentLoaded",()=>{
     const listadoHabilidades = new ListadoHabilidades();
     const alertas = document.querySelector(".alertas");

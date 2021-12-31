@@ -1,5 +1,12 @@
 <main class="contenedor">
-    <form action="/editarPerfil" method="post" class="default-form">
+    <form action="/editarPerfil" method="POST" class="default-form"  enctype="multipart/form-data">
+        <div class="campo">
+            <label for="">Imagen</label>
+            <input type="file" name="imagen">
+        </div>
+        <div class="campo">
+            <img src="/uploads/perfiles/{{usuario.imagen}}" alt="" srcset="" class="">
+        </div>
         <div class="campo">
             <label for="">Nombre</label>
             <input type="text" name="nombre" placeholder="Tu nombre" value="{{usuario.nombre}}">
@@ -9,17 +16,10 @@
             <input type="text" name="email" placeholder="Tu correo electronico" value="{{usuario.email}}">
         </div>
         <div class="campo">
-            <label for="">Contraseña actual</label>
-            <input type="text" name="passwordNow" placeholder="Tu contraseña">
-        </div>
-        <div class="campo">
-            <label for="">Contraseña nueva</label>
+            <label for="">Contraseña</label>
             <input type="text" name="password" placeholder="Tu contraseña">
         </div>
-        <div class="campo">
-            <label for="">Repetir contraseña nueva</label>
-            <input type="text" name="passwordNew" placeholder="Tu contraseña">
-        </div>
+        
         <div class="campo">
             <input type="submit" value="Guardar Cambios" class="btn btn-azul">
         </div>
