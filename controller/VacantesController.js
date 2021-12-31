@@ -1,4 +1,5 @@
 const Vacante = require("../model/Vacantes");
+const shortId = require("shortid");
 
 exports.formularioNuevaVacante = async (req,res,next)=>{
     try {
@@ -84,12 +85,14 @@ exports.formEditarVacante = async(req,res,next)=>{
     try {
         const {url} = req.params;
         const vacante = await Vacante.findOne({url}).lean();
-
+      
+        
         res.render("editarVacante",{
             namePage: "Editando Vacante",
             vacante,
             cerrarSesion: true,
-            nombre: res.locals.usuario.nombre
+            nombre: res.locals.usuario.nombre,
+          
         });
     } catch (error) {
         next();
@@ -118,8 +121,11 @@ exports.editarVacante = async(req,res,next)=>{
         if(!errores){
             const vacanteActualizada = req.body;
             vacanteActualizada.skills = vacanteActualizada.skills.split(",");
+
             const vacante = await Vacante.findOneAndUpdate({url: req.params.url},vacanteActualizada,{new:true});
             res.redirect(`/vacantes/${vacante.url}`);
+            
+            
         }else{
             req.flash("error", errores.map(error=>error.msg));
             const {url} = req.params;
@@ -154,3 +160,96 @@ exports.eliminarVacante = async(req,res,next)=>{
 
     
 }
+
+//Subir cv funcionalidad
+
+
+const validarCurriculum = (req)=>{
+    const cv = req.files.cv;
+    const errores = [];
+    const {size,mimetype} = cv;
+    if(size<0 || size>150000){
+        errores.push("Error, el archivo supero el tamaño maximo");
+    }
+    if(mimetype.split("/")[1]!=="pdf"){
+        errores.push("Error, el formato del archivo debe de ser PDF");
+    }
+
+    return errores;
+}
+const subirCurriculum = async (req,res)=>{
+    const {cv} = req.files;
+    const {url} = req.params;
+    const vacanteOBJ= req.body;
+    const vacante = await Vacante.findOne({url});
+
+    if(vacante){
+        const extension = cv.mimetype.split("/")[1];
+        const cvName = shortId.generate()+"."+extension;
+
+        const nuevoCandidato ={
+            nombre: vacanteOBJ.nombre,
+            email: vacanteOBJ.email,
+            cv : cvName
+        }
+        cv.mv(__dirname+"../../public/uploads/cv/"+cvName, async function(error){
+           if(error){
+            req.flash("error", ["Error al enviar el cv"]);
+           
+            const vacanteFind = await Vacante.findOne({url}).lean().populate("autor");
+            if(vacante){
+                res.render("vacante",{
+                    namePage : vacante.titulo,
+                    vacante:vacanteFind,
+                    barra:true,
+                    mensajes: req.flash()
+                });
+             }
+           }
+        })
+       vacante.candidatos.push(nuevoCandidato);
+       await vacante.save();
+    }
+    
+
+
+}
+exports.contactar = async(req,res,next)=>{
+    
+    let {nombre, email} = req.body;
+    nombre = nombre.trim();
+    email = email.trim();
+    let fails = [];
+    if(nombre!=="" || email!==""){
+        if(req.files){
+            const errores = validarCurriculum(req);
+            if(errores.length===0){
+                subirCurriculum(req,res);
+                req.flash("correcto", "Se envio la solicitud con exito");
+                res.redirect("/");
+                return next();
+            }else{
+                fails = errores;
+            }
+        }else{
+            fails.push("Error, El cv en formato PDF es obligatorio")
+            
+        }
+    }else{
+       fails.push("Error, el nombre y el correo electronico son obligatorios");
+           
+    }
+    req.flash("error", fails);
+    const {url} = req.params;
+    const vacante = await Vacante.findOne({url}).lean().populate("autor");
+    if(vacante){
+        res.render("vacante",{
+            namePage : vacante.titulo,
+            vacante,
+            barra:true,
+            mensajes: req.flash()
+        });
+    }
+
+    
+} 

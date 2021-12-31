@@ -28,6 +28,10 @@ router.post("/vacantes/editar/:url",
     authController.usuarioAutenticado,
     vacantesController.editarVacante
     );
+router.post("/vacantes/:url", 
+    authController.usuarioAutenticado,
+    vacantesController.contactar
+    )
 
 router.delete("/vacantes/eliminar/:id", vacantesController.eliminarVacante)
 

@@ -23,7 +23,7 @@
             <div class="vacante-descripcion">
                 {{{vacante.descripcion}}}
             </div>
-            <a href="/vacantes/editar/{{vacante.url}}" class="btn btn-azul editar-btn">Editar Vacante</a>
+           
         </main>
         <aside class="sidebar">
             <h2>Conocimientos deseados</h2>
@@ -36,7 +36,25 @@
 </div>
 <div class="contenedor datos-reclutador">
     <div class="enviar-datos">
-
+        <h2>Contactar Reclutador</h2>
+        <p>Llena el siguiente formulario y sube tu CV</p>
+        <form action="/vacantes/{{vacante.url}}" method="POST" enctype="multipart/form-data" class="default-form">
+            <div class="campo">
+                <label for="">Nombre</label>
+                <input type="text" name="nombre" placeholder="Tu nombre">
+            </div>
+            <div class="campo">
+                <label for="">E-Mail</label>
+                <input type="email" name="email" placeholder="Tu email">
+            </div>
+            <div class="campo">
+                <label for="">CV (PDF)</label>
+                <input type="file" name="cv">
+            </div>
+            <div class="campo">
+                <input type="submit" class="btn btn-verde" value="Enviar">
+            </div>
+        </form>
     </div>
     <div class="info-reclutador">
         <h2>Información del reclutador</h2>
