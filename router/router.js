@@ -32,6 +32,7 @@ router.post("/vacantes/:url",
     authController.usuarioAutenticado,
     vacantesController.contactar
     )
+router.get("/candidatos/:id", authController.usuarioAutenticado,vacantesController.mostrarCandidatos)
 
 router.delete("/vacantes/eliminar/:id", vacantesController.eliminarVacante)
 

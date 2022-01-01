@@ -43,7 +43,7 @@ const VacantesSchema = new Schema({
     candidatos: {
         type: [{
             nombre: String,
-            emial: String,
+            email: String,
             cv: String
         }]
     },

@@ -253,3 +253,25 @@ exports.contactar = async(req,res,next)=>{
 
     
 } 
+
+exports.mostrarCandidatos = async( req,res,next)=>{
+    try {
+        const {id} = req.params;
+        const autor = res.locals.usuario._id;
+        const nombre = res.locals.usuario.nombre;
+        const vacante = await Vacante.findById(id).lean();
+        const candidatos = vacante.candidatos;
+
+        if(autor.equals(vacante.autor)){
+           res.render("candidatos",{
+               namePage: "Candidatos",
+               cerrarSesion: true,
+               candidatos,
+               nombre
+           })
+        }
+        
+    } catch (error) {
+        
+    }
+}
