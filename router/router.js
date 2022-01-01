@@ -32,6 +32,8 @@ router.get("/candidatos/:id",
     vacantesController.mostrarCandidatos);
 router.delete("/vacantes/eliminar/:id", 
     vacantesController.eliminarVacante);
+router.post("/buscador",
+    vacantesController.buscarVacantes);
 
     //Session
 router.get("/crearCuenta", 

@@ -275,3 +275,29 @@ exports.mostrarCandidatos = async( req,res,next)=>{
         
     }
 }
+
+exports.buscarVacantes  = async(req,res,next)=>{
+    
+    let query = req.body.q;
+    query = query.trim();
+    let vacantes = [];
+    if(query.length===0){
+         vacantes = await Vacante.find().lean();
+    }else{
+         vacantes = await Vacante.find({
+            $text:{
+                $search: req.body.q
+            }
+        }).lean();
+    }
+
+    
+   
+    res.render("home",{
+        namePage: "DevJobs",
+        tagLine: "Encuentra y publica trabajos para desarrolladores web",
+        barra: true,
+        boton: true,
+        vacantes
+    });
+}

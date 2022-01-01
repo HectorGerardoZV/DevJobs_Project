@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
 const flash = require("connect-flash");
 const fileupload = require("express-fileupload");
+const createError  = require("http-errors");
 
 const passport = require("./config/passport");
 
@@ -70,6 +71,15 @@ app.use((req,res,next)=>{
 //Adding router
 app.use("/",router);
 
+app.use((req,res,next)=>{
+    next(createError(404, "No encontrado"));
+})
+
+app.use((error,req,res)=>{
+    const mensaje = error.message;
+    const status  = error.status;
+    res.render("error", {mensaje,status});
+})
 
 //Starting server
 app.listen(process.env.PUERTO, ()=>{
