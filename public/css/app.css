@@ -70,8 +70,14 @@ h3 {
 .btn-amarillo {
     background-color: #F6B15F;
 }
+.btn-amarillo:hover {
+    background-color: #d49547;
+}
 .btn-rojo {
     background-color: #C80045;
+}
+.btn-rojo:hover {
+    background-color: #a5043d;
 }
 
 .editar-btn {

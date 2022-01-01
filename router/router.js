@@ -9,62 +9,66 @@ const authController = require("../controller/AuthController");
 
 router.get("/",homeController.mostrarTrabajos);
 
-//Vacantes
+    //Vacantes
 router.get("/vacantes/nueva",
     authController.usuarioAutenticado,
-    vacantesController.formularioNuevaVacante
-);
+    vacantesController.formularioNuevaVacante);
 router.post("/vacantes/nueva",
     authController.usuarioAutenticado,
-    vacantesController.agregarVacante
-);
-
-router.get("/vacantes/:url", vacantesController.mostrarVacante);
+    vacantesController.agregarVacante);
+router.get("/vacantes/:url", 
+    vacantesController.mostrarVacante);
 router.get("/vacantes/editar/:url", 
     authController.usuarioAutenticado,
-    vacantesController.formEditarVacante
-    );
+    vacantesController.formEditarVacante);
 router.post("/vacantes/editar/:url", 
     authController.usuarioAutenticado,
-    vacantesController.editarVacante
-    );
+    vacantesController.editarVacante);
 router.post("/vacantes/:url", 
     authController.usuarioAutenticado,
-    vacantesController.contactar
-    )
-router.get("/candidatos/:id", authController.usuarioAutenticado,vacantesController.mostrarCandidatos)
+    vacantesController.contactar);
+router.get("/candidatos/:id", 
+    authController.usuarioAutenticado,
+    vacantesController.mostrarCandidatos);
+router.delete("/vacantes/eliminar/:id", 
+    vacantesController.eliminarVacante);
 
-router.delete("/vacantes/eliminar/:id", vacantesController.eliminarVacante)
-
-//Session
-router.get("/crearCuenta", usuarioController.formCrearCuenta);
+    //Session
+router.get("/crearCuenta", 
+    usuarioController.formCrearCuenta);
 router.post("/crearCuenta",
     usuarioController.validarRegistro,
-    usuarioController.crearCuenta
-     );
+    usuarioController.crearCuenta);
+router.get("/reestablecerPassword",
+    authController.reestablecerPasswordForm);
+router.post("/reestablecerPassword",
+    authController.enviarToken);
+router.get("/reestablecerPassword/:token",
+    authController.reestablecerPassword);
+router.post("/reestablecerPassword/:token",
+    authController.guardarPassword);
 
      //Authentication
-router.get("/iniciarSesion", usuarioController.formIniciarSesion);
-router.post("/iniciarSesion", authController.autenticarUsuario);
+router.get("/iniciarSesion", 
+    usuarioController.formIniciarSesion);
+router.post("/iniciarSesion", 
+    authController.autenticarUsuario);
 router.get("/cerrarSesion", 
     authController.usuarioAutenticado,
-    authController.cerrarSesion
-    );
+    authController.cerrarSesion);
+
     //Administration
 router.get("/administracion", 
     authController.usuarioAutenticado,
-    administracionController.mostrarPanel
-    );
+    administracionController.mostrarPanel);
 
     //User Profile
 router.get("/editarPerfil",
     authController.usuarioAutenticado,
-    usuarioController.formEditarPerfil
-    );
+    usuarioController.formEditarPerfil);
 router.post("/editarPerfil",
     authController.usuarioAutenticado,
-    usuarioController.editarPerfil
-    );
+    usuarioController.editarPerfil);
 
 
 module.exports = router;
